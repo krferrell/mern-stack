@@ -1,0 +1,9 @@
+{
+  "short_name": "Workout Tracker",
+  "name": "Workout Tracker",
+  "icons": [],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
