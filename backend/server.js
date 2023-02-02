@@ -9,9 +9,7 @@ const app = express();
 
 // Middleware: runs on each request. Next() runs the actual requst.
 app.use(express.json());
-app.use(cors({
-    origin: ['https://localhost:3000']
-}));
+app.use(cors());
 
 app.use((req, res, next) => {
     console.log(req.path, req.method);
