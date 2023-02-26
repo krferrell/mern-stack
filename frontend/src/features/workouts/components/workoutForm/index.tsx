@@ -4,8 +4,8 @@ import CustomCalendar from '../calendar';
 
 export interface IWorkoutValues {
   exercise: string;
-  weight: number;
-  repetitions: number;
+  weight: string;
+  repetitions: string;
   date: string;
 }
 
@@ -16,8 +16,8 @@ const WorkoutForm = () => {
     <Formik
       initialValues={{
         exercise: '',
-        weight: 0,
-        repetitions: 0,
+        weight: '',
+        repetitions: '',
         date: '',
       }}
       onSubmit={(
@@ -36,7 +36,8 @@ const WorkoutForm = () => {
           !!values.exercise &&
           !!values.weight &&
           !!values.repetitions &&
-          !!values.date;
+          !!values.date &&
+          Object.keys(errors).length === 0;
         return (
           <Form
             style={{ display: 'flex', flexDirection: 'column', width: '500px' }}
