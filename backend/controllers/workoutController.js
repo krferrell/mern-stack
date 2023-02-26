@@ -23,12 +23,13 @@ const getWorkout = async (req, res) => {
 
 // create workout
 const createWorkout = async (req, res) => {
-    const { title, reps, weight } = req.body;
+    const { title, reps, weight, date } = req.body;
     try {
         const workout = await Workout.create({
             title,
             reps,
-            weight
+            weight,
+            date
         });
         res.status(200).json(workout);
     } catch (err) {
