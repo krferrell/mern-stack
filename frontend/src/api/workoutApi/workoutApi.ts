@@ -7,12 +7,12 @@ export const workoutApi = createApi({
   reducerPath: 'workoutApi',
   baseQuery: fetchBaseQuery({ baseUrl: 'http://localhost:4000/' }),
   endpoints: (builder) => ({
-    getAllWorkouts: builder.query<IWorkoutRequest, string>({
+    getAllWorkouts: builder.query<any, string>({
       query: () => `api/workouts/`,
     }),
   }),
-})
+});
 
 // Export hooks for usage in functional components, which are
 // auto-generated based on the defined endpoints
-export const { useGetAllWorkoutsQuery } = workoutApi
+export const { useGetAllWorkoutsQuery } = workoutApi;

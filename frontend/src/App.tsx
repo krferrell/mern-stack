@@ -1,13 +1,20 @@
-import { useGetAllWorkoutsQuery } from './api/workoutApi/workoutApi';
+import WorkoutList from './features/workouts/components/workoutList';
+import { useState } from 'react';
+import Calendar from 'react-calendar';
+import WorkoutForm from './features/workouts/components/workoutForm';
 
 function App() {
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
-  const { data } = useGetAllWorkoutsQuery("");
+  const openForm = (value: Date) => {
+    setIsFormOpen(true);
+    console.log(value);
+  };
 
-  console.log(data);
   return (
     <div>
-
+      {/* <WorkoutList /> */}
+      <WorkoutForm />
     </div>
   );
 }
