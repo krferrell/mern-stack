@@ -1,43 +1,36 @@
-import { Formik, FormikHelpers, FormikProps } from 'formik';
+import { Formik, FormikProps } from 'formik';
 import { useState } from 'react';
 import CustomCalendar from '../calendar';
 import { StyledForm, StyledSubmitButton } from '../calendar/styles';
 import { ReusableInput } from '../reusableInput';
 import validationSchema from './schema';
+import { useCreateWorkoutMutation } from '../../api/workoutApi/workoutApi';
 
 export interface IWorkoutValues {
-  exercise: string;
+  title: string;
   weight: string;
   reps: string;
-  date: string;
+  date: Date;
 }
 
-const WorkoutForm = () => {
-  const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
+const WorkoutForm = ({ date }: { date: Date }) => {
+  const [createWorkout, result] = useCreateWorkoutMutation();
 
   return (
     <Formik
       initialValues={{
-        exercise: '',
+        title: '',
         weight: '',
         reps: '',
-        date: '',
+        date: date,
       }}
       validationSchema={validationSchema}
-      onSubmit={(
-        values: IWorkoutValues,
-        { setSubmitting }: FormikHelpers<IWorkoutValues>
-      ) => {
-        setTimeout(() => {
-          console.log(JSON.stringify(values, null, 2));
-          setSubmitting(false);
-        }, 500);
-      }}
+      onSubmit={(values) => createWorkout(values)}
     >
       {(formikProps: FormikProps<IWorkoutValues>) => {
         const { values, errors, touched } = formikProps;
         const canSubmit: boolean =
-          !!values.exercise &&
+          !!values.title &&
           !!values.weight &&
           !!values.reps &&
           !!values.date &&
@@ -48,11 +41,11 @@ const WorkoutForm = () => {
             <ReusableInput
               label='Exercise'
               placeHolder='Bench Press'
-              fieldName='exercise'
+              fieldName='title'
               formikProps={formikProps}
-              value={values.exercise}
-              touched={touched.exercise}
-              errors={errors.exercise}
+              value={values.title}
+              touched={touched.title}
+              errors={errors.title}
             />
             <ReusableInput
               label='Weight'
@@ -72,16 +65,10 @@ const WorkoutForm = () => {
               touched={touched.reps}
               errors={errors.reps}
             />
-            <CustomCalendar
-              fieldName='date'
-              isCalendarOpen={isCalendarOpen}
-              setIsCalendarOpen={setIsCalendarOpen}
-              placeHolder={'Fri Jan 14 2006'}
-            />
             <StyledSubmitButton
-              type='submit'
               disabled={!canSubmit}
-              onClick={() => {
+              onClick={(e) => {
+                e.preventDefault();
                 formikProps.handleSubmit();
               }}
             >
