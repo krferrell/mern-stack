@@ -87,3 +87,20 @@ select {
     scroll-behavior: auto !important;
   }
 }
+
+.react-calendar__tile {
+  height: 50px;
+  max-height: 100px;
+  border-radius: 100px;
+}
+
+/* .react-calendar__tile--now {
+  background-color: lightBlue !important;
+}
+.react-calendar__tile--active {
+  background-color: blue !important;
+} */
+
+.black {
+  background-color: black !important;
+}
