@@ -1,12 +1,7 @@
-import { useState } from 'react';
-import WorkoutForm from './components/workoutForm';
+import HomePage from './components/homePage';
 
 function App() {
-  return (
-    <div>
-      <WorkoutForm />
-    </div>
-  );
+  return <HomePage />;
 }
 
 export default App;
