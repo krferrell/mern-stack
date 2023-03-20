@@ -1,14 +1,15 @@
-import { FC, useState } from 'react';
-import { useField } from 'formik';
-import { Calendar } from 'react-calendar';
-import { StyledCalendarInput, StyledOverlay } from './styles';
-import { StyledErrorContainer, StyledErrorText } from '../reusableInput/styles';
+import { FC } from 'react';
+import Calendar from 'react-calendar';
+import { StyledOverlay } from './styles';
+import 'react-calendar/dist/Calendar.css';
 
 interface ICustomCalendarProps {
   fieldName: string;
   setIsCalendarOpen: (value: boolean) => void;
   isCalendarOpen: boolean;
   placeHolder: string;
+  setSelectedDate: (date: Date) => void;
+  date: Date | null;
 }
 
 const CustomCalendar: FC<ICustomCalendarProps> = ({
@@ -16,48 +17,51 @@ const CustomCalendar: FC<ICustomCalendarProps> = ({
   setIsCalendarOpen,
   isCalendarOpen,
   placeHolder,
+  setSelectedDate,
+  date,
 }) => {
-  const [date, setDate] = useState(new Date());
-  const [formattedDate, setFormattedDate] = useState<string | null>(null);
-  const [field, meta, helpers] = useField(fieldName);
-
-  const formatDate = (date: Date) => {
-    return date.toString().split(' ', 4).join(' ');
+  const onDatePicked = (value: any) => {
+    setSelectedDate(value);
+    console.log(value);
+    setTimeout(() => {
+      setIsCalendarOpen(false);
+    }, 200);
   };
 
-  const onDatePicked = (value: Date, event: any) => {
-    setFormattedDate(formatDate(value)!);
-    setDate(value);
-    setIsCalendarOpen(false);
-    helpers.setValue(value);
+  const dateArray = [
+    { date: new Date('March 12, 2023 03:24:00') },
+    { date: new Date('March 13, 2023 03:24:00') },
+    { date: new Date('March 14, 2023 03:24:00') },
+  ];
+
+  const highlightDaysWithWorkout = (date: Date) => {
+    const dateobj = dateArray.find((x) => {
+      return (
+        date.getDay() === new Date(x.date).getDay() &&
+        date.getMonth() === new Date(x.date).getMonth() &&
+        date.getDate() === new Date(x.date).getDate()
+      );
+    });
+    return dateobj ? 'black' : '';
   };
 
   return (
     <>
-      <label>Date</label>
-      <StyledCalendarInput
-        onClick={() => setIsCalendarOpen(true)}
-        isPlaceHolder={formattedDate}
-      >
-        <span>{formattedDate ? formattedDate : placeHolder}</span>
-      </StyledCalendarInput>
       {isCalendarOpen && (
         <StyledOverlay
           onClick={(e) => {
             setIsCalendarOpen(false);
-            helpers.setTouched(true);
           }}
         >
           <div onClick={(e: any) => e.stopPropagation()}>
-            <Calendar onChange={onDatePicked} value={date} />
+            <Calendar
+              onChange={onDatePicked}
+              value={date}
+              tileClassName={({ date }) => highlightDaysWithWorkout(date)}
+            />
           </div>
         </StyledOverlay>
       )}
-      <StyledErrorContainer>
-        {meta.error && meta.touched && (
-          <StyledErrorText>{meta.error}</StyledErrorText>
-        )}
-      </StyledErrorContainer>
     </>
   );
 };
