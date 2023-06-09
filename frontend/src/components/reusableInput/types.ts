@@ -1,6 +1,6 @@
-import { IWorkoutValues } from '../workoutForm';
-import { InputHTMLAttributes } from 'react';
-import { FormikProps } from 'formik';
+import { IWorkoutValues } from "../newWorkoutForm";
+import { InputHTMLAttributes } from "react";
+import { FormikProps } from "formik";
 
 export interface IReusableInputProps
   extends InputHTMLAttributes<HTMLInputElement> {

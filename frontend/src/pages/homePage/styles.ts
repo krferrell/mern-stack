@@ -1,4 +1,4 @@
-import styled from 'styled-components';
+import styled from "styled-components";
 
 export const StyledHomePage = styled.div`
   position: fixed;
@@ -6,6 +6,6 @@ export const StyledHomePage = styled.div`
   height: 100%;
   left: 0;
   top: 0;
-  background: rgba(51, 51, 51, 0.7);
+  background: #212121;
   z-index: 0;
 `;

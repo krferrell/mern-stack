@@ -3,7 +3,7 @@ import {
   useGetAllWorkoutsQuery,
   useDeleteWorkoutMutation,
 } from '../../api/workoutApi/workoutApi';
-import { IWorkoutValues } from '../workoutForm';
+import { IWorkoutValues } from "../newWorkoutForm";
 import { StyledWorkoutList } from './styled';
 import { IWorkout, IWorkoutListProps } from './types';
 

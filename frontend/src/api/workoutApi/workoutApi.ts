@@ -1,6 +1,6 @@
 // Need to use the React-specific entry point to import createApi
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
-import { IWorkoutValues } from '../../components/workoutForm';
+import { IWorkoutValues } from "../../components/newWorkoutForm";
 
 // Define a service using a base URL and expected endpoints
 export const workoutApi: any = createApi({
