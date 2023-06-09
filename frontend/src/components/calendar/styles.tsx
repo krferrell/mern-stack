@@ -28,13 +28,3 @@ export const StyledSubmitButton = styled.button<{ disabled: boolean }>`
   margin-top: 30px;
 `;
 
-export const StyledOverlay = styled.div`
-  position: fixed;
-  height: 100%;
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: black;
-  opacity: 0.5;
-`;
