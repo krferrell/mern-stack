@@ -1,17 +1,34 @@
 import { Formik, FormikProps } from 'formik';
 import { StyledForm, StyledSubmitButton } from "../calendar/styles";
 import { ReusableInput } from "../reusableInput";
+import { useState } from "react";
 import validationSchema from "./schema";
 
 export interface IWorkoutValues {
   duration: string;
   date: string;
+  exercises: IExercise[];
+}
+
+export interface IExercise {
+  name: string;
+  repetitions: string;
+  weight: string;
+  rpe: string;
+}
+
+export interface INewWorkoutValues {
+  date: string;
+  duration: string;
 }
 
 const WorkoutForm = () => {
-
-  const handleSubmit = (values: IWorkoutValues) => {
-    // @TODO pass data to new workout page
+  const [newWorkoutValues, setNewWorkoutValues] = useState<INewWorkoutValues>({
+    date: "",
+    duration: "",
+  });
+  const handleSubmit = (values: INewWorkoutValues) => {
+    setNewWorkoutValues(values);
   };
 
   return (
@@ -23,7 +40,7 @@ const WorkoutForm = () => {
       validationSchema={validationSchema}
       onSubmit={(values) => handleSubmit(values)}
     >
-      {(formikProps: FormikProps<IWorkoutValues>) => {
+      {(formikProps: FormikProps<INewWorkoutValues>) => {
         const { values, errors, touched } = formikProps;
         const canSubmit: boolean =
           !!values.duration &&
