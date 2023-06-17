@@ -1,15 +1,16 @@
-import { createUserWithEmailAndPassword } from '@firebase/auth';
-import { auth } from '../../firebase';
-import { useDispatch } from 'react-redux';
-import { setUser } from '../../features/user/userSlice';
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { createUserWithEmailAndPassword } from "@firebase/auth";
+import { auth } from "../../firebase";
+import { useDispatch } from "react-redux";
+import { setUser } from "../../features/user/userSlice";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { handleAuthWithGoogle } from "../../utils/googleAuth";
 
 const SignUp = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const [email, setEmail] = useState<string>('');
-  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
 
   const handleSignUp = () => {
     createUserWithEmailAndPassword(auth, email, password)
@@ -22,7 +23,7 @@ const SignUp = () => {
           })
         );
       })
-      .then(() => navigate('/home'))
+      .then(() => navigate("/home"))
       .catch((error) => {
         // const errorCode = error.code;
         // const errorMessage = error.message;
@@ -34,16 +35,19 @@ const SignUp = () => {
   return (
     <div>
       <input
-        type='text'
+        type="text"
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
-        type='password'
+        type="password"
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={() => handleSignUp()}>Sign up</button>
+      <button onClick={() => handleAuthWithGoogle(navigate, dispatch)}>
+        Sign Up With Google
+      </button>
     </div>
   );
 };
