@@ -9,7 +9,7 @@ export const workoutApi: any = createApi({
   tagTypes: ['Workouts'],
   endpoints: (builder) => ({
     getAllWorkouts: builder.query<any, string>({
-      query: () => `api/workouts/`,
+      query: () => `api/userID/workouts/`,
       providesTags: ['Workouts'],
     }),
     deleteWorkout: builder.mutation<any, IWorkoutValues>({
