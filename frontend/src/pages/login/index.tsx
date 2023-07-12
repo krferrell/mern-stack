@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { setUser } from '../../features/user/userSlice';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { handleAuthWithGoogle } from '../../utils/googleAuth';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -44,6 +45,7 @@ const Login = () => {
         onChange={(e) => setPassword(e.target.value)}
       />
       <button onClick={() => handleLogin()}>Login</button>
+      <button onClick={() => handleAuthWithGoogle(navigate, dispatch)}>Login With Google</button>
     </div>
   );
 };
